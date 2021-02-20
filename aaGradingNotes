@@ -1,0 +1,60 @@
+
+Execution
+----------
+
+Output for sample data1.txt file from assignment is not correct.
+Typescript shows same problem, duplicating mouse abby, the last
+item of data.
+
+With more thorough testing, output has same problem. Probably eof issue.
+This affects histogram and average.
+
+Did not crash on empty file, but did not handle empty file correctly.
+Shows one student.  Likely an eof issue (same problem as with data).
+
+
+Source code
+-------------
+
+Don't left justify your comments. They are always indented at the
+same level as the code they go with. Did someone teach you that?
+Shame on them.
+
+When sorting, you can't assume there is data and read the first item into
+the array. That is your problem with an empty file.
+
+Your bug is an eof issue.
+The way you check eof will never work on linux. This is why we went over
+bubble.cpp in such great detail. You must check eof directly after you read.
+Always. Datafiles are formatted differently on windows and linux.
+Datafiles on windows don't always have an end-of-line (EOL) char on the
+last line whereas linux files always have an EOL char on the last line.
+See "Explaining end-of-file I/O" on the Course Notes/Practice Problems page.
+To make windows and the mac look like linux, make sure the cursor is on
+the line after the last line of data.
+
+In sortInput, do the work of strncmp once on the same thing, i.e.,
+do the function call, strncmp(temp.last, students[i].last), once.
+You don't want to do the same work of traversing arrays more than once.
+Make the call once and use the value inside the if, e.g.:
+    int lastVal = strncmp(temp.last, students[i].last);
+    if (lastVal < 0) {
+       . . .
+    }
+    else if (lastVal == 0 . . .)
+
+Don't hardcode numbers in code or comments, e.g., 100. Use identifier.
+Use all those great identifiers I gave you.
+
+You can assign struct, e.g., students[index+1] = students[index];
+Don't need to assign piecewise. If you use struct temp instead of
+arrays and an int, that can be assigned too: students[cell+1] = temp;
+
+Parameters: Need const on students[] in displayList.
+
+Parameters: Need const on students[] in setHistogram.
+
+Parameters: Need const on histogram[] in displayHistogram.
+Only one param is needed.
+
+Overall nice coding.
